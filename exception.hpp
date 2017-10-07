@@ -5,7 +5,7 @@
 
 #include <fmt/ostream.h>
 
-namespace util {
+namespace mfl {
 
   /////////////////////////////////////
   // Exception wrapper
