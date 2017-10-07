@@ -38,20 +38,4 @@ namespace util {
     fmt::print(file, "\n");
   }
 
-  inline uint8_t toUint8(const char character) {
-    if (character >= 48 && character < 58) {
-      return character - 48;
-    }
-
-    if (character >= 65 && character < 71) {
-      return character - 55;
-    }
-
-    if (character >= 97 && character < 103) {
-      return character - 87;
-    }
-
-    return -1;
-  }
-
 }

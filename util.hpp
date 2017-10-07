@@ -2,6 +2,7 @@
 
 #include <string>
 #include <algorithm>
+#include <functional>
 
 #include <fmt/format.h>
 
@@ -33,6 +34,22 @@ namespace util {
     return returnString;
   }
 
+  inline uint8_t toUint8(const char character) {
+    if (character >= 48 && character < 58) {
+      return character - 48;
+    }
+
+    if (character >= 65 && character < 71) {
+      return character - 55;
+    }
+
+    if (character >= 97 && character < 103) {
+      return character - 87;
+    }
+
+    return -1;
+  }
+
   inline const std::string simplifyValue(double value) {
     if (value < 1000) {
       return fmt::format("{:d}", value);
@@ -61,20 +78,23 @@ namespace util {
     return "<invalid>";
   }
 
-  template <bool x64>
   inline bool isBigEndian() {
-    if (x64) {
-      union {
-        uint64_t i;
-        char c[8];
-      } testValue = { 0x0102030405060708 };
-    } else {
-      union {
-        uint32_t i;
-        char c[4];
-      } testValue = { 0x01020304 };
-    }
-
-    return testValue.c[0] == 1;
+#if defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN || \
+    defined(__BIG_ENDIAN__) || \
+    defined(__ARMEB__) || \
+    defined(__THUMBEB__) || \
+    defined(__AARCH64EB__) || \
+    defined(_MIBSEB) || defined(__MIBSEB) || defined(__MIBSEB__)
+    return true;
+#elif defined(__BYTE_ORDER) && __BYTE_ORDER == __LITTLE_ENDIAN || \
+    defined(__LITTLE_ENDIAN__) || \
+    defined(__ARMEL__) || \
+    defined(__THUMBEL__) || \
+    defined(__AARCH64EL__) || \
+    defined(_MIPSEL) || defined(__MIPSEL) || defined(__MIPSEL__)
+    return false;
+#else
+#error "Could not detect endianess"
+#endif
   }
 }
