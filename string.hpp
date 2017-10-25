@@ -53,7 +53,7 @@ namespace mfl {
 
     inline const std::string simplifyValue(double value) {
       if (value < 1000) {
-        return fmt::format("{:d}", value);
+        return fmt::format("{:03.2f}", value);
       }
 
       value /= 1000.0;
