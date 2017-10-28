@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <istream>
+#include <fstream>
 
 #include <fmt/format.h>
 
@@ -13,6 +13,10 @@ namespace mfl {
     /////////////////////////////////////
     // File handling
     inline bool testFileExists(const char *fileName) {
+      if (!fileName) {
+        return false;
+      }
+
       std::ifstream testOutput(fileName);
       if (testOutput.is_open()) {
         testOutput.close();
