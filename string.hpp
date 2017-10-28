@@ -11,7 +11,7 @@ namespace mfl {
 
     /////////////////////////////////////
     // String handling
-    inline void trimInPlace(std::string &str) {
+    inline void trimInPlace(std::string & str) {
       // Left trim
       str.erase(
           str.begin(),
@@ -29,7 +29,7 @@ namespace mfl {
       );
     }
 
-    inline std::string trim(const std::string &str) {
+    inline std::string trim(const std::string & str) {
       std::string returnString(str);
       trimInPlace(returnString);
       return returnString;

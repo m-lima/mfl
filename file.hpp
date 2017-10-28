@@ -12,7 +12,7 @@ namespace mfl {
 
     /////////////////////////////////////
     // File handling
-    inline bool testFileExists(const char *fileName) {
+    inline bool testFileExists(const char * fileName) {
       if (!fileName) {
         return false;
       }
@@ -27,8 +27,8 @@ namespace mfl {
     }
 
     template<int MaxTries = 20>
-    inline void guaranteeNewFile(std::string &path,
-                                 const std::string &extension) {
+    inline void guaranteeNewFile(std::string & path,
+                                 const std::string & extension) {
       // Check if the file exists
       // Keep appending ".new" before the extension until
       // the filename is unique
