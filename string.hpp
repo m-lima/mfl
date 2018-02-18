@@ -11,6 +11,18 @@ namespace mfl {
 
     /////////////////////////////////////
     // String handling
+    inline std::string toLower(const std::string & str) {
+      std::string out;
+      std::transform(str.cbegin(), str.cend(), std::back_inserter(out), ::tolower);
+      return out;
+    }
+
+    inline std::string toUpper(const std::string & str) {
+      std::string out;
+      std::transform(str.cbegin(), str.cend(), std::back_inserter(out), ::toupper);
+      return out;
+    }
+
     inline void trimInPlace(std::string & str) {
       // Left trim
       str.erase(
