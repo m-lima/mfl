@@ -9,7 +9,8 @@
 
 namespace mfl {
   namespace util {
-    inline std::string getHomeFolder() {
+
+    inline std::string getHomePath() {
 #ifdef WIN32
       auto homePath = std::getenv("USERPROFILE");
       if (homePath) return homePath;
@@ -17,12 +18,44 @@ namespace mfl {
       auto homeDrive = std::getenv("HOMEDRIVE");
       if (homeDrive) {
         homePath = std::getenv("HOMEPATH");
-        return std::string(homeDrive + homePath);
+        return {homeDrive + homePath};
       }
 #else
       auto homePath = std::getenv("HOME");
       if (homePath) return homePath;
 #endif
+      return "";
+    }
+
+    inline std::string getDataPath() {
+      auto configPath = std::getenv("$XDG_DATA_HOME");
+      if (configPath) return configPath;
+
+      auto homePath = getHomePath();
+      if (!homePath.empty()) {
+#ifdef WIN32
+        return {homePath + "/AppData/Roaming"};
+#else
+        return {homePath + "/.local/share"};
+#endif
+      }
+
+      return "";
+    }
+
+    inline std::string getConfigPath() {
+      auto configPath = std::getenv("$XDG_CONFIG_HOME");
+      if (configPath) return configPath;
+
+      auto homePath = getHomePath();
+      if (!homePath.empty()) {
+#ifdef WIN32
+        return {homePath + "/AppData/Roaming"};
+#else
+        return {homePath + "/.config"};
+#endif
+      }
+
       return "";
     }
 
