@@ -8,6 +8,23 @@
 
 namespace mfl {
   namespace util {
+    inline std::string getHomeFolder() {
+#ifdef WIN32
+      auto homePath = getenv("USERPROFILE");
+      if (homePath) return homePath;
+
+      auto homeDrive = getenv("HOMEDRIVE");
+      if (homeDrive) {
+        homePath = getenv("HOMEPATH");
+        return std::string(homeDrive + homePath);
+      }
+#else
+      auto homePath = getenv("HOME");
+      if (homePath) return homePath;
+#endif
+      return "";
+    }
+
     inline bool isBigEndian() {
 #if defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN || \
     defined(__BIG_ENDIAN__) || \
