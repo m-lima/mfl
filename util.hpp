@@ -3,6 +3,7 @@
 #include <string>
 #include <algorithm>
 #include <functional>
+#include <cstdlib>
 
 #include <fmt/format.h>
 
@@ -10,16 +11,16 @@ namespace mfl {
   namespace util {
     inline std::string getHomeFolder() {
 #ifdef WIN32
-      auto homePath = getenv("USERPROFILE");
+      auto homePath = std::getenv("USERPROFILE");
       if (homePath) return homePath;
 
-      auto homeDrive = getenv("HOMEDRIVE");
+      auto homeDrive = std::getenv("HOMEDRIVE");
       if (homeDrive) {
-        homePath = getenv("HOMEPATH");
+        homePath = std::getenv("HOMEPATH");
         return std::string(homeDrive + homePath);
       }
 #else
-      auto homePath = getenv("HOME");
+      auto homePath = std::getenv("HOME");
       if (homePath) return homePath;
 #endif
       return "";
