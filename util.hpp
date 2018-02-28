@@ -2,7 +2,7 @@
 
 namespace mfl {
   namespace util {
-    inline bool isBigEndian() {
+    constexpr bool isBigEndian() {
 #if defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN || \
     defined(__BIG_ENDIAN__) || \
     defined(__ARMEB__) || \
@@ -21,5 +21,10 @@ namespace mfl {
 #error "Could not detect endianess"
 #endif
     }
+
+    template <typename T, typename E>
+    constexpr T safeCast(E value) {
+        return static_cast<T>(value & ~(1 << (sizeof(T) * 8 - 1)));
+    };
   }
 }
