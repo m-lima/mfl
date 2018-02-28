@@ -25,6 +25,6 @@ namespace mfl {
     template <typename T, typename E>
     constexpr T safeCast(E value) {
         return static_cast<T>(value & ~(1 << (sizeof(T) * 8 - 1)));
-    };
+    }
   }
 }
