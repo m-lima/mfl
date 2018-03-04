@@ -14,7 +14,7 @@ namespace mfl {
       auto homeDrive = std::getenv("HOMEDRIVE");
       if (homeDrive) {
         homePath = std::getenv("HOMEPATH");
-        return {homeDrive + homePath};
+        return std::string(homeDrive) + homePath;
       }
 #else
       auto homePath = std::getenv("HOME");
