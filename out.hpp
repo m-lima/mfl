@@ -31,6 +31,12 @@ namespace mfl {
       fmt::print(lineBreakFormat);
     }
 
+    inline void println(std::FILE * file, const std::string & string) {
+      std::string lineBreakFormat(string);
+      lineBreakFormat.append("\n");
+      fmt::print(file, lineBreakFormat);
+    }
+
     inline void println() {
       fmt::print("\n");
     }
