@@ -2,7 +2,7 @@
 
 namespace mfl {
   namespace util {
-    constexpr bool isBigEndian() {
+    constexpr bool isBigEndian() const {
 #if defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN \
    || defined(__BIG_ENDIAN__) \
    || defined(__i386__) || defined(__alpha__) \
