@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <sstream>
 #include <algorithm>
 #include <functional>
 
@@ -45,6 +46,26 @@ namespace mfl {
       std::string returnString(str);
       trimInPlace(returnString);
       return returnString;
+    }
+
+    inline std::vector<std::string> split(const std::string & str, char delimiter) {
+      std::vector<std::string> out{};
+      std::stringstream stringStream{str};
+      std::string item;
+
+      while (std::getline(stringStream, item, delimiter)) {
+        out.push_back(item);
+      }
+
+      return out;
+    }
+
+    inline bool startsWith(const std::string & str, const std::string & prefix) {
+      if (str.size() > prefix.size()) {
+        return false;
+      }
+
+      return std::equal(str.cbegin(), str.cend(), prefix.cbegin());
     }
 
     inline uint8_t toUint8(const char character) {
