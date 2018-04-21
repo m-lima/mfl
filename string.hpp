@@ -61,11 +61,11 @@ namespace mfl {
     }
 
     inline bool startsWith(const std::string & str, const std::string & prefix) {
-      if (str.size() > prefix.size()) {
+      if (str.size() < prefix.size()) {
         return false;
       }
 
-      return std::equal(str.cbegin(), str.cend(), prefix.cbegin());
+      return std::equal(prefix.cbegin(), prefix.cend(), str.cbegin());
     }
 
     inline uint8_t toUint8(const char character) {
