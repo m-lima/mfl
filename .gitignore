@@ -5,7 +5,7 @@
 **/.idea
 
 # Build
-build
+**/build
 cmake-build-debug
 
 # OpenCL
