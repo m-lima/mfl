@@ -132,5 +132,110 @@ namespace mfl {
 
       return format;
     }
+
+    namespace hash32 {
+      constexpr static std::uint32_t prime{16'777'619u};
+      constexpr static std::uint32_t offset{2'166'136'261u};
+
+      /**
+       * Hash until null termination
+       *
+       * @param toHash string to hash
+       * @return the hashed version
+       */
+      inline constexpr std::uint32_t hash(const char * toHash) {
+        std::uint32_t hash{offset};
+        const char * hashed{toHash};
+
+        for (;; ++hashed) {
+          if (*hashed == 0)
+            break;
+          hash *= prime;
+          hash ^= *hashed;
+        }
+
+        return hash;
+      }
+
+      /**
+       * Hash until length
+       *
+       * @param toHash string to hash
+       * @param length length to hash
+       * @return the hashed version
+       */
+      inline constexpr std::uint32_t hash(const char * toHash, std::size_t length) {
+        std::uint32_t hash{offset};
+        const char * hashed{toHash};
+
+        for (std::size_t i{0}; i < length; ++i, ++hashed) {
+          hash *= prime;
+          hash ^= *hashed;
+        }
+
+        return hash;
+      }
+
+      inline std::uint32_t hash(const std::string & toHash) {
+        return hash(toHash.c_str(), toHash.length());
+      }
+
+      inline constexpr std::uint32_t operator "" _f32(const char * string, std::size_t len) {
+        return hash(string, len);
+      }
+    }
+
+    namespace hash64 {
+      constexpr static std::uint64_t prime{1'099'511'628'211ull};
+      constexpr static std::uint64_t offset{14'695'981'039'346'656'037ull};
+
+      /**
+       * Hash until null termination
+       *
+       * @param toHash string to hash
+       * @return the hashed version
+       */
+      inline constexpr std::uint64_t hash(const char * toHash) {
+        std::uint64_t hash{offset};
+        const char * hashed{toHash};
+
+        for (;; ++hashed) {
+          if (*hashed == 0)
+            break;
+          hash = hash * prime;
+          hash = hash ^ *hashed;
+        }
+
+        return hash;
+      }
+
+      /**
+       * Hash until length
+       *
+       * @param toHash string to hash
+       * @param length length to hash
+       * @return the hashed version
+       */
+      inline constexpr std::uint64_t hash(const char * toHash, std::size_t length) {
+        std::uint64_t hash{offset};
+        const char * hashed{toHash};
+
+        for (std::size_t i{0}; i < length; ++i, ++hashed) {
+          hash = hash * prime;
+          hash = hash ^ *hashed;
+        }
+
+        return hash;
+      }
+
+      inline std::uint64_t hash(const std::string & toHash) {
+        return hash(toHash.c_str(), toHash.length());
+      }
+
+      inline constexpr std::uint64_t operator "" _f64(const char * string, std::size_t len) {
+        return hash(string, len);
+      }
+    }
   }
 }
+
