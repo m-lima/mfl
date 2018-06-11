@@ -180,7 +180,7 @@ namespace mfl {
         return hash(toHash.c_str(), toHash.length());
       }
 
-      inline constexpr std::uint32_t operator "" _f32(const char * string, std::size_t len) {
+      inline constexpr std::uint32_t operator "" _h(const char * string, std::size_t len) {
         return hash(string, len);
       }
     }
@@ -232,7 +232,7 @@ namespace mfl {
         return hash(toHash.c_str(), toHash.length());
       }
 
-      inline constexpr std::uint64_t operator "" _f64(const char * string, std::size_t len) {
+      inline constexpr std::uint64_t operator "" _h(const char * string, std::size_t len) {
         return hash(string, len);
       }
     }
