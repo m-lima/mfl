@@ -133,6 +133,10 @@ namespace mfl {
       return format;
     }
 
+    /**
+     * Taken and adapted from from my good friend jodleif at:
+     * https://github.com/jodleif/strhashliteral
+     */
     namespace hash32 {
       constexpr static std::uint32_t prime{16'777'619u};
       constexpr static std::uint32_t offset{2'166'136'261u};
