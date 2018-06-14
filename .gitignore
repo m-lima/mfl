@@ -8,5 +8,5 @@
 **/build
 cmake-build-debug
 
-# OpenCL
-include/CL
+# Deps
+ext
