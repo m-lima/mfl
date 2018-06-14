@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.3)
 
 # Depends on libfmt/fmt
-include(ext/fmt/fmt.cmake)
+include(${CMAKE_CURRENT_SOURCE_DIR}/ext/fmt/fmt.cmake)
 
 # Defining the library
 add_library(mfl INTERFACE)
