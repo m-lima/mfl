@@ -8,13 +8,17 @@ ExternalProject_Add(fmt-project
   SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/pack/fmt
   STAMP_DIR ${CMAKE_CURRENT_LIST_DIR}/pack/tmp/fmt
   TMP_DIR ${CMAKE_CURRENT_LIST_DIR}/pack/tmp/fmt
-  CMAKE_ARGS "-DFMT_TEST=OFF"
+  CMAKE_ARGS "-DFMT_DOC:BOOL=OFF" "-DFMT_TEST:BOOL=OFF" "-DFMT_INSTALL:BOOL=OFF"
   BUILD_COMMAND ""
   INSTALL_COMMAND ""
   )
 
-set(FMT_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/pack/fmt/include)
+add_library(fmt INTERFACE)
 
-add_library(fmt STATIC IMPORTED)
-set_property(TARGET fmt PROPERTY INTERFACE_LINK_LIBRARIES fmt::fmt-header-only)
+target_compile_definitions(fmt INTERFACE FMT_HEADER_ONLY=1)
+
+target_include_directories(fmt INTERFACE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/pack/fmt/include>
+  $<INSTALL_INTERFACE:include>)
+
 add_dependencies(fmt fmt-project)
