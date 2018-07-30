@@ -31,14 +31,14 @@ namespace mfl {
           str.begin(),
           std::find_if(str.begin(),
                        str.end(),
-                       std::not1(std::ptr_fun<int, int>(std::isspace)))
+                       [](int c) {return !std::isspace(c);})
       );
 
       // Right trim
       str.erase(
           std::find_if(str.rbegin(),
                        str.rend(),
-                       std::not1(std::ptr_fun<int, int>(std::isspace))).base(),
+                       [](int c) {return !std::isspace(c);}).base(),
           str.end()
       );
     }
