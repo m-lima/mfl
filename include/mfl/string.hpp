@@ -56,7 +56,7 @@ namespace mfl {
         return string;
       }
 
-      constexpr char operator[](int i) const {
+      constexpr char operator[](std::size_t i) const {
         return string[i];
       }
 
