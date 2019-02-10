@@ -1,15 +1,69 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <sstream>
 #include <algorithm>
 #include <functional>
+#include <sstream>
+#include <string>
+#include <utility>
+#include <vector>
 
 #include <fmt/format.h>
 
 namespace mfl {
   namespace string {
+
+    template <std::size_t N>
+    struct Literal {
+      const char string[N];
+
+      template <std::size_t ... Sequence>
+      constexpr Literal(const char (& string)[N], std::index_sequence<Sequence...>) : string{string[Sequence]...} {}
+
+      constexpr Literal(const char (& string)[N]) : Literal(string, std::make_index_sequence<N>{}) {}
+
+      template <std::size_t P, std::size_t S, std::size_t ... PrefixSequence, std::size_t ... SuffixSequence>
+      constexpr Literal(const char (& prefix)[P],
+                        const char (& suffix)[S],
+                        std::index_sequence<PrefixSequence...>,
+                        std::index_sequence<SuffixSequence...>)
+          : string{prefix[PrefixSequence]..., suffix[SuffixSequence]...} {}
+
+      template <std::size_t P, std::size_t S>
+      constexpr Literal(const char (& prefix)[P], const char (& suffix)[S])
+          : Literal<P + S - 1>{prefix, suffix, std::make_index_sequence<P - 1>{}, std::make_index_sequence<S>{}} {}
+
+      template <std::size_t S>
+      constexpr auto append(const char (& suffix)[S]) const {
+        return Literal<N + S - 1UL>{string, suffix};
+      }
+
+      template <std::size_t S>
+      constexpr auto append(const Literal<S> & suffix) const {
+        return Literal<N + S - 1UL>{string, suffix.string};
+      }
+
+      template <std::size_t S>
+      constexpr auto operator+(const char (& suffix)[S]) const {
+        return append(suffix);
+      }
+
+      template <std::size_t S>
+      constexpr auto operator+(const Literal<S> & suffix) const {
+        return append(suffix);
+      }
+
+      constexpr operator const char * const() const {
+        return string;
+      }
+
+      constexpr char operator[](int i) const {
+        return string[i];
+      }
+
+      constexpr std::size_t size() const {
+        return N;
+      }
+    };
 
     /////////////////////////////////////
     // String handling
