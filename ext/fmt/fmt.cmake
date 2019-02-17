@@ -6,8 +6,8 @@ ExternalProject_Add(fmt-project
   GIT_REPOSITORY "https://github.com/fmtlib/fmt.git"
   GIT_TAG "master"
   SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/pack/fmt
-  STAMP_DIR ${CMAKE_CURRENT_LIST_DIR}/pack/tmp/fmt
-  TMP_DIR ${CMAKE_CURRENT_LIST_DIR}/pack/tmp/fmt
+  STAMP_DIR ${CMAKE_CURRENT_LIST_DIR}/pack/stamp
+  TMP_DIR ${CMAKE_CURRENT_LIST_DIR}/pack/tmp
   CMAKE_ARGS "-DFMT_DOC:BOOL=OFF" "-DFMT_TEST:BOOL=OFF" "-DFMT_INSTALL:BOOL=OFF"
   BUILD_COMMAND ""
   INSTALL_COMMAND ""
