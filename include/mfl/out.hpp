@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include <fmt/ostream.h>
+#include <fmt/core.h>
 
 namespace mfl {
   namespace out {

@@ -3,7 +3,7 @@
 #include <string>
 #include <stdexcept>
 
-#include <fmt/ostream.h>
+#include <fmt/core.h>
 
 namespace mfl {
 

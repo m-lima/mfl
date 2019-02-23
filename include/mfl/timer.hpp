@@ -3,7 +3,7 @@
 #include <chrono>
 #include <string>
 
-#include <fmt/format.h>
+#include <fmt/core.h>
 
 namespace mfl {
   class Timer {

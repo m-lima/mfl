@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 
-#include <fmt/format.h>
+#include <fmt/core.h>
 
 #include "exception.hpp"
 
