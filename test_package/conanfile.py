@@ -2,6 +2,7 @@ from conans import ConanFile, CMake, tools
 import os
 
 class MflTestConan(ConanFile):
+    requires = "mfl/1.0@mfl/stable"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
 
