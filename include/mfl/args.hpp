@@ -8,20 +8,17 @@ namespace mfl {
 
     /////////////////////////////////////
     // Argument handling
-    inline char * extractOption(char * begin[],
-                                char * end[],
-                                const std::string & option) {
-      char ** itr = std::find(begin, end, option);
+    inline char * extractOption(int argc, char * argv[], const std::string & option) {
+      auto end = argc + argv;
+      char ** itr = std::find(argv, end, option);
       if (itr != end && ++itr != end) {
         return *itr;
       }
       return 0;
     }
 
-    inline bool findOption(char * begin[],
-                           char * end[],
-                           const std::string & option) {
-      return std::find(begin, end, option) != end;
+    inline bool findOption(int argc, char * argv[], const std::string & option) {
+      return std::find(argv, argv + argc, option) != argv + argc;
     }
 
   }
