@@ -43,6 +43,16 @@ namespace mfl {
       }
 
       template <std::size_t S>
+      constexpr auto prepend(const char (& prefix)[S]) const {
+        return Literal<N + S - 1UL>{prefix, string};
+      }
+
+      template <std::size_t S>
+      constexpr auto prepend(const Literal<S> & prefix) const {
+        return Literal<N + S - 1UL>{prefix.string, string};
+      }
+
+      template <std::size_t S>
       constexpr auto operator+(const char (& suffix)[S]) const {
         return append(suffix);
       }
@@ -121,6 +131,14 @@ namespace mfl {
       }
 
       return std::equal(prefix.cbegin(), prefix.cend(), str.cbegin());
+    }
+
+    inline bool endsWith(const std::string & str, const std::string & suffix) {
+      if (str.size() < suffix.size()) {
+        return false;
+      }
+
+      return std::equal(suffix.cbegin(), suffix.cend(), str.cend() - suffix.size());
     }
 
     inline uint8_t toUint8(const char character) {
