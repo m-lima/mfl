@@ -125,6 +125,26 @@ namespace mfl {
       return out;
     }
 
+    template <typename Predicate>
+    inline std::vector<std::string> split(const std::string & str, Predicate predicate) {
+      std::vector<std::string> out{};
+      auto it = str.cbegin();
+
+      while (it < str.cend()) {
+        auto end = std::find_if(it, str.cend(), predicate);
+        if (end - it > 0) {
+          out.emplace_back(it, end);
+        }
+        it = end + 1;
+      }
+
+      return out;
+    }
+
+    inline std::vector<std::string> split(const std::string & str) {
+      return split(str, [](char c) { return std::isspace(c); });
+    }
+
     inline bool startsWith(const std::string & str, const std::string & prefix) {
       if (str.size() < prefix.size()) {
         return false;
