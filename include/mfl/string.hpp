@@ -62,6 +62,11 @@ namespace mfl {
         return append(suffix);
       }
 
+      template <std::size_t P, std::size_t S>
+      friend constexpr auto operator+(const char (& prefix)[P], const Literal<S> & suffix) {
+        return suffix.prepend(prefix);
+      }
+
       constexpr operator const char * const() const {
         return string;
       }
