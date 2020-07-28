@@ -14,11 +14,12 @@ ExternalProject_Add(fmt-project
   )
 
 add_library(fmt INTERFACE)
+target_link_libraries(fmt fmt-headers-only)
 
-target_compile_definitions(fmt INTERFACE FMT_HEADER_ONLY=1)
+# target_compile_definitions(fmt INTERFACE FMT_HEADER_ONLY=1)
 
-target_include_directories(fmt INTERFACE
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/pack/fmt/include>
-  $<INSTALL_INTERFACE:include>)
+# target_include_directories(fmt INTERFACE
+#   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/pack/fmt/include>
+#   $<INSTALL_INTERFACE:include>)
 
 add_dependencies(fmt fmt-project)
