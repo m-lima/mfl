@@ -7,7 +7,7 @@ class MflConan(ConanFile):
     description = "Util tools for cpp"
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake"
-    requires = "fmt/5.3.0@bincrafters/stable"
+    requires = "fmt/6.2.1"
     exports_sources = "include/mfl/*"
     no_copy_source = True
 
